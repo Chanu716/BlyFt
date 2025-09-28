@@ -31,6 +31,7 @@ import 'package:brevity/controller/services/backend_service.dart' as backend;
 import 'package:brevity/controller/bloc/news_scroll_bloc/news_scroll_bloc.dart';
 import 'package:brevity/controller/cubit/theme/theme_state.dart';
 import 'package:brevity/models/theme_model.dart';
+import 'package:brevity/controller/services/facebook_auth_service.dart';
 // ADD THESE IMPORTS
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:brevity/controller/services/notification_service.dart';
@@ -403,6 +404,10 @@ void main() async {
     Log.d("[Main][main]: Initializing AuthService");
     await AuthService().initializeAuth();
     Log.i("[Main][main]: AuthService initialization completed");
+
+    Log.d("[Main][main]: Initializing Facebook Auth Service");
+    await FacebookAuthService().initialize();
+    Log.i("[Main][main]: Facebook Auth Service initialization completed");
 
     Log.d("[Main][main]: Initializing ApiService");
     await backend.ApiService().initializeTokens();

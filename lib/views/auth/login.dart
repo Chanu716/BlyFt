@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:brevity/controller/services/auth_service.dart';
+import 'package:brevity/views/auth/facebook_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -242,6 +243,13 @@ class _LoginScreenState extends State<LoginScreen>
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
+  }
+
+  // Facebook login handler
+  Future<void> _handleFacebookLogin() async {
+    // The actual Facebook login is handled by the FacebookLoginButton widget
+    // This method can be used for any additional logic if needed
+    HapticFeedback.lightImpact();
   }
 
   @override
@@ -605,15 +613,21 @@ class _LoginScreenState extends State<LoginScreen>
                             child: EnhancedSocialButton(
                               onPressed: () {
                                 HapticFeedback.lightImpact();
-                                // Apple login logic can be added here
+                                // Handle Facebook login with our Facebook widget
+                                _handleFacebookLogin();
                               },
-                              icon: Icons.apple_rounded,
-                              text: 'Apple',
-                              iconColor: Colors.white,
+                              icon: Icons.facebook,
+                              text: 'Facebook',
+                              iconColor: const Color(0xFF1877F2),
                             ),
                           ),
                         ],
                       ),
+
+                      const SizedBox(height: 16),
+
+                      // Facebook Login Button (Full Width)
+                      const FacebookLoginButton(),
 
                       const SizedBox(height: 24),
 

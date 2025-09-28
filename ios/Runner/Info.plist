@@ -60,6 +60,28 @@
 				<string>brevity</string>
 			</array>
 		</dict>
+		<!-- Facebook URL Scheme -->
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>facebook-login</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- Replace YOUR_FACEBOOK_APP_ID with actual Facebook App ID -->
+				<string>fbYOUR_FACEBOOK_APP_ID</string>
+			</array>
+		</dict>
 	</array>
+	
+	<!-- Facebook App ID -->
+	<key>FacebookAppID</key>
+	<string>YOUR_FACEBOOK_APP_ID</string>
+	
+	<!-- Facebook Client Token -->
+	<key>FacebookClientToken</key>
+	<string>YOUR_FACEBOOK_CLIENT_TOKEN</string>
+	
+	<!-- Facebook Display Name -->
+	<key>FacebookDisplayName</key>
+	<string>Brevity</string>
 </dict>
 </plist>

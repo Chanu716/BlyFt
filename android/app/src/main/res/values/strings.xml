@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Brevity</string>
     <string name="default_notification_channel_id">default</string>
+    
+    <!-- 
+    Replace with your actual Facebook App ID from https://developers.facebook.com
+    This is a placeholder - you need to create a Facebook app and get the real values
+    -->
+    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+    <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+    <string name="fb_login_protocol_scheme">fbYOUR_FACEBOOK_APP_ID</string>
 </resources>

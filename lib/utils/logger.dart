@@ -1,20 +1,23 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:logger/logger.dart';
 
 class Log {
   static final Logger _logger = Logger(
-    printer: PrettyPrinter(
-      methodCount: 0,
-      errorMethodCount: 8,
-      lineLength: 80,
-      colors: true,
-      printEmojis: false,
-      excludeBox: {
-        Level.debug: true,
-        Level.info: true,
-        Level.warning: true,
-        Level.error: true,
-      },
-    ),
+    printer: kIsWeb 
+        ? SimplePrinter() // Use SimplePrinter for web to avoid Platform issues
+        : PrettyPrinter(
+            methodCount: 0,
+            errorMethodCount: 8,
+            lineLength: 80,
+            colors: true,
+            printEmojis: false,
+            excludeBox: {
+              Level.debug: true,
+              Level.info: true,
+              Level.warning: true,
+              Level.error: true,
+            },
+          ),
     level: Level.debug,
   );
 

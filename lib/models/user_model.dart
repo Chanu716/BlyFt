@@ -76,4 +76,9 @@ class UserModel {
       profileImageUrl: profileImageUrl ?? this.profileImageUrl,
     );
   }
+
+  // JSON serialization methods
+  Map<String, dynamic> toJson() => toMap();
+  
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel.fromMap(json);
 }

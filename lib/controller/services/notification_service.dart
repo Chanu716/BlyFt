@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:brevity/utils/logger.dart';
@@ -23,6 +24,13 @@ class NotificationService {
   Future<void> initialize() async {
     if (_isInitialized) {
       Log.d('NOTIFICATION_SERVICE: Service already initialized, skipping');
+      return;
+    }
+
+    // Skip notification initialization on web platform
+    if (kIsWeb) {
+      Log.i('NOTIFICATION_SERVICE: Skipping notification service initialization on web platform');
+      _isInitialized = true;
       return;
     }
 
@@ -88,7 +96,7 @@ class NotificationService {
   }
 
   Future<void> _createNotificationChannel() async {
-    if (Platform.isAndroid) {
+    if (!kIsWeb && Platform.isAndroid) {
       Log.d('NOTIFICATION_SERVICE: Creating Android notification channels');
 
       final AndroidFlutterLocalNotificationsPlugin? androidPlugin =
@@ -145,7 +153,7 @@ class NotificationService {
   Future<bool> requestPermissions() async {
     Log.i('NOTIFICATION_SERVICE: Requesting notification permissions');
 
-    if (Platform.isAndroid) {
+    if (!kIsWeb && Platform.isAndroid) {
       final AndroidFlutterLocalNotificationsPlugin? androidPlugin =
       _notifications
           .resolvePlatformSpecificImplementation<
@@ -167,7 +175,7 @@ class NotificationService {
       } else {
         Log.w('NOTIFICATION_SERVICE: Android plugin not available for permission request');
       }
-    } else if (Platform.isIOS) {
+    } else if (!kIsWeb && Platform.isIOS) {
       final bool? result = await _notifications
           .resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin
@@ -430,7 +438,7 @@ class NotificationService {
   Future<bool> areNotificationsEnabled() async {
     Log.d('NOTIFICATION_SERVICE: Checking if notifications are enabled at system level');
 
-    if (Platform.isAndroid) {
+    if (!kIsWeb && Platform.isAndroid) {
       final AndroidFlutterLocalNotificationsPlugin? androidPlugin =
       _notifications
           .resolvePlatformSpecificImplementation<

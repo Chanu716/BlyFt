@@ -5,10 +5,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -52,5 +49,14 @@ class DefaultFirebaseOptions {
     projectId: 'news-ai-914981',
     storageBucket: 'news-ai-914981.firebasestorage.app',
     iosBundleId: 'com.unity.brevity',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBCdTg_6cWfqkTiv4VJuhs3VovUQfpLBdw',
+    appId: '1:627461571018:web:a1b2c3d4e5f6g7h8',
+    messagingSenderId: '627461571018',
+    projectId: 'news-ai-914981',
+    storageBucket: 'news-ai-914981.firebasestorage.app',
+    authDomain: 'news-ai-914981.firebaseapp.com',
   );
 }
