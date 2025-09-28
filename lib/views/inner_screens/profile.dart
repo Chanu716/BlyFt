@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:brevity/controller/cubit/theme/theme_cubit.dart';
 import 'package:brevity/controller/cubit/user_profile/user_profile_cubit.dart';
@@ -8,7 +9,6 @@ import 'package:brevity/controller/cubit/user_profile/user_profile_state.dart';
 import 'package:brevity/views/common_widgets/common_appbar.dart';
 import 'package:brevity/models/theme_model.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -102,7 +102,11 @@ class _ProfileScreenState extends State<ProfileScreen>
     final currentTheme = context.read<ThemeCubit>().currentTheme;
 
     // Save the original status bar style
-    final originalSystemUiOverlayStyle = SystemChrome.latestStyle;
+    final originalSystemUiOverlayStyle = SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    );
 
     try {
       // Set the status bar style for the cropper
@@ -146,9 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       return null;
     } finally {
       // IMPORTANT: Restore the original status bar style when the cropper is closed
-      if (originalSystemUiOverlayStyle != null) {
-        SystemChrome.setSystemUIOverlayStyle(originalSystemUiOverlayStyle);
-      }
+      SystemChrome.setSystemUIOverlayStyle(originalSystemUiOverlayStyle);
     }
   }
 

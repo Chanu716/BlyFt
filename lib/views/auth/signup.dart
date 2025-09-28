@@ -188,7 +188,11 @@ class _SignupScreenState extends State<SignupScreen>
 
   // NEW HELPER METHOD FOR CROPPING
   Future<File?> _cropImage(File imageFile) async {
-    final originalSystemUiOverlayStyle = SystemChrome.latestStyle;
+    final originalSystemUiOverlayStyle = SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    );
     try {
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(
@@ -219,9 +223,7 @@ class _SignupScreenState extends State<SignupScreen>
           ),
         ],
       );
-      if (originalSystemUiOverlayStyle != null) {
-        SystemChrome.setSystemUIOverlayStyle(originalSystemUiOverlayStyle);
-      }
+      SystemChrome.setSystemUIOverlayStyle(originalSystemUiOverlayStyle);
       if (croppedFile != null) {
         return File(croppedFile.path);
       }
@@ -238,9 +240,7 @@ class _SignupScreenState extends State<SignupScreen>
       }
       return null;
     } finally {
-      if (originalSystemUiOverlayStyle != null) {
-        SystemChrome.setSystemUIOverlayStyle(originalSystemUiOverlayStyle);
-      }
+      SystemChrome.setSystemUIOverlayStyle(originalSystemUiOverlayStyle);
     }
   }
 
